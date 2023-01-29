@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: withastro/action@v0
+        with:
+          node-version: 18
+
+  deploy:
+    permissions:
+      id-token: write
+      pages: write
+    needs: build
+    runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v1
