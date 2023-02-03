@@ -1,0 +1,4 @@
+!.*
+.lintstagedrc.yaml
+package.json
+pnpm-lock.yaml

@@ -1,0 +1,6 @@
+"*.{cjs,js,json,mjs,ts,tsx,yaml}":
+  - "eslint --fix"
+"package.json":
+  - "sort-package-json"
+"*":
+  - "prettier --ignore-unknown --write"

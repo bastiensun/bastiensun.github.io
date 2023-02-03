@@ -1,0 +1,32 @@
+extends:
+  - canonical
+overrides:
+  - extends:
+      - canonical/json
+    files: "*.json"
+  - extends:
+      - canonical/typescript
+    files: "*.ts"
+  - extends:
+      - canonical/jsx-a11y
+      - canonical/react
+      - canonical/typescript
+      - plugin:tailwindcss/recommended
+    files: "*.tsx"
+  - extends:
+      - canonical/vitest
+    files: "*.test.{ts,tsx}"
+  - extends:
+      - canonical/yaml
+    files: "*.yaml"
+    rules:
+      yml/quotes:
+        - error
+        - avoidEscape: true
+          prefer: double
+  - extends:
+      - canonical/prettier
+    files: "*"
+    rules:
+      prettier/prettier: off
+root: true

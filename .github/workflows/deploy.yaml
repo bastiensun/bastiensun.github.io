@@ -1,11 +1,5 @@
-name: Deploy
-
-on:
-  workflow_dispatch:
-
 concurrency:
   group: ${{ github.workflow }}
-
 jobs:
   build:
     permissions:
@@ -16,16 +10,20 @@ jobs:
       - uses: withastro/action@v0
         with:
           node-version: 18
-
   deploy:
-    permissions:
-      id-token: write
-      pages: write
-    needs: build
-    runs-on: ubuntu-22.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    permissions:
+      id-token: write
+      pages: write
+    runs-on: ubuntu-22.04
     steps:
       - id: deployment
         uses: actions/deploy-pages@v1
+name: Deploy
+on:
+  #  eslint-disable yml/no-empty-mapping-value
+  workflow_dispatch:
+  #  eslint-enable yml/no-empty-mapping-value
